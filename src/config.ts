@@ -1,9 +1,9 @@
 export const SITE = {
-  website: "https://hn.jier.info/", // replace this with your deployed domain
+  website: "https://www.jier.info/", // replace this with your deployed domain
   author: "Ben",
-  profile: "https://satnaing.dev/",
-  desc: "A minimal, responsive and SEO-friendly Astro blog theme.",
-  title: "每日黑客新闻",
+  profile: "https://www.jier.info/",
+  desc: "hacknews recap",
+  title: "黑客新闻摘要",
   ogImage: "hacknews_og.jpg",
   lightAndDarkMode: true,
   postPerIndex: 4,
