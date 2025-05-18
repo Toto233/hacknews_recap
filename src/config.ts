@@ -3,7 +3,7 @@ export const SITE = {
   author: "Ben",
   profile: "https://www.jier.info/",
   desc: "hacknews recap",
-  title: "黑客新闻摘要",
+  title: "每日黑客新闻摘要",
   ogImage: "hacknews_og.jpg",
   lightAndDarkMode: true,
   postPerIndex: 4,
