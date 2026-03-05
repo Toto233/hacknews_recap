@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vibe coding 氛围编程</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'PingFang SC', 'Source Han Sans CN', 'Microsoft YaHei', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #ffffff;
+            color: #1a1a1a;
+            overflow: hidden;
+        }
+
+        .reveal {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .slides {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 80px 100px;
+            opacity: 0;
+            transform: translateX(100%);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .slide.active {
+            opacity: 1;
+            transform: translateX(0);
+            z-index: 1;
+        }
+
+        .slide.prev {
+            transform: translateX(-100%);
+        }
+
+        h1 {
+            font-size: 60pt;
+            font-weight: bold;
+            margin-bottom: 40px;
+            color: #0066cc;
+            text-align: center;
+            letter-spacing: 2px;
+        }
+
+        h2 {
+            font-size: 48pt;
+            font-weight: bold;
+            margin-bottom: 50px;
+            color: #1a1a1a;
+            text-align: center;
+        }
+
+        h3 {
+            font-size: 36pt;
+            font-weight: bold;
+            margin-bottom: 30px;
+            color: #333333;
+        }
+
+        .subtitle {
+            font-size: 28pt;
+            color: #666666;
+            text-align: center;
+            margin-bottom: 60px;
+            font-weight: normal;
+        }
+
+        .content-box {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        ul, ol {
+            margin: 40px 0;
+            padding-left: 60px;
+            font-size: 32pt;
+            line-height: 2;
+            color: #333333;
+        }
+
+        li {
+            margin: 20px 0;
+        }
+
+        .highlight {
+            color: #0066cc;
+            font-weight: bold;
+        }
+
+        .wrong {
+            color: #cc0000;
+            font-weight: bold;
+        }
+
+        .correct {
+            color: #009933;
+            font-weight: bold;
+        }
+
+        .emoji {
+            font-size: 0.8em;
+            margin-right: 0.2em;
+        }
+
+        code {
+            background: #f5f5f5;
+            padding: 4px 12px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            color: #0066cc;
+            font-size: 0.9em;
+        }
+
+        pre {
+            background: #f8f8f8;
+            padding: 40px;
+            border-radius: 8px;
+            margin: 40px 0;
+            border-left: 4px solid #0066cc;
+            font-size: 18pt;
+            line-height: 1.6;
+            overflow-x: auto;
+        }
+
+        pre code {
+            background: none;
+            padding: 0;
+            color: #333333;
+        }
+
+        .center-text {
+            text-align: center;
+        }
+
+        .two-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            width: 100%;
+            max-width: 1400px;
+        }
+
+        .column {
+            padding: 40px;
+        }
+
+        .feature-list {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .feature-list li {
+            padding: 15px 0;
+            font-size: 30pt;
+            color: #333333;
+        }
+
+        .quote {
+            font-size: 32pt;
+            line-height: 1.8;
+            color: #333333;
+            margin: 60px 0;
+            padding: 50px;
+            border-left: 6px solid #0066cc;
+            background: #f8f8f8;
+            border-radius: 0 12px 12px 0;
+        }
+
+        .cta {
+            font-size: 44pt;
+            font-weight: bold;
+            color: #0066cc;
+            margin: 60px 0;
+            text-align: center;
+        }
+
+        .single-line {
+            font-size: 56pt;
+            font-weight: bold;
+            color: #1a1a1a;
+            text-align: center;
+            padding: 60px 40px;
+        }
+
+        .divider {
+            width: 100px;
+            height: 4px;
+            background: #0066cc;
+            margin: 40px auto;
+        }
+
+        .progress {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            height: 4px;
+            background: #0066cc;
+            transition: width 0.3s ease;
+            z-index: 100;
+        }
+
+        .controls {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            gap: 15px;
+            z-index: 100;
+        }
+
+        .control-btn {
+            background: rgba(0, 102, 204, 0.1);
+            border: 2px solid #0066cc;
+            color: #0066cc;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 16pt;
+            font-weight: bold;
+        }
+
+        .control-btn:hover {
+            background: #0066cc;
+            color: #ffffff;
+        }
+
+        .slide-number {
+            position: fixed;
+            bottom: 30px;
+            left: 30px;
+            font-size: 18pt;
+            color: #999999;
+            z-index: 100;
+        }
+
+        .section-number {
+            position: fixed;
+            top: 40px;
+            left: 40px;
+            font-size: 24pt;
+            color: #cccccc;
+            font-weight: bold;
+            z-index: 100;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 36pt; }
+            h2 { font-size: 28pt; }
+            h3 { font-size: 24pt; }
+            .slide { padding: 40px; }
+            .two-columns { grid-template-columns: 1fr; }
+            .subtitle { font-size: 20pt; }
+            ul, ol { font-size: 24pt; }
+        }
+    </style>
+</head>
+<body>
+    <div class="reveal">
+        <div class="slides">
+            <!-- 封面 -->
+            <div class="slide active" data-slide="1">
+                <h1>vibe coding</h1>
+                <div class="divider"></div>
+                <div class="subtitle">氛围编程 · AI 时代的编程新范式</div>
+                <div style="text-align: center; color: #666; font-size: 24pt; margin-top: 80px;">
+                    早上手，早受益<br>
+                    让工具尽早形成复利
+                </div>
+            </div>
+
+            <!-- 不是什么 -->
+            <div class="slide" data-slide="15">
+                <h2>推荐关注</h2>
+                <div class="divider"></div>
+                <div style="display: flex; gap: 20px; flex-wrap: wrap; margin: 40px 0;">
+                    
+                    <div style="flex: 1; min-width: 250px; padding: 20px; border: 1px solid #e0e0e0; border-radius: 12px;">
+                        <h3 style="color: #0066cc; margin-bottom: 10px;">📱 宝玉AI</h3>
+                        <p style="color: #666; margin: 5px 0;">微信公众号：宝玉AI</p>
+                        <p style="color: #333; line-height: 1.6;">AI 工具使用、编程技巧、实战经验分享</p>
+                        <p style="color: #999; font-size: 0.9em;">深入浅出，注重实战</p>
+                        <div style="margin-top: 15px;">
+                            <img src="images/b8d513cb-c453-4dc9-9e69-e7fed0bc73a6.webp" style="width: 100%; border-radius: 8px;" alt="宝玉AI">
+                        </div>
+                    </div>
+
+                    <div style="flex: 1; min-width: 250px; padding: 20px; border: 1px solid #e0e0e0; border-radius: 12px;">
+                        <h3 style="color: #0066cc; margin-bottom: 10px;">📊 数字生命卡兹克</h3>
+                        <p style="color: #666; margin: 5px 0;">微信公众号：数字生命卡兹克</p>
+                        <p style="color: #333; line-height: 1.6;">AI 前沿动态、工具测评、行业洞察</p>
+                        <p style="color: #999; font-size: 0.9em;">信息量大，更新及时</p>
+                        <div style="margin-top: 15px;">
+                            <img src="images/d3d26763-262f-429f-a580-e163be772258.jpg" style="width: 100%; border-radius: 8px;" alt="数字生命卡兹克">
+                        </div>
+                    </div>
+
+                    <div style="flex: 1; min-width: 250px; padding: 20px; border: 1px solid #e0e0e0; border-radius: 12px;">
+                        <h3 style="color: #0066cc; margin-bottom: 10px;">👓 小互AI</h3>
+                        <p style="color: #666; margin: 5px 0;">微信公众号：小互AI</p>
+                        <p style="color: #333; line-height: 1.6;">AI 资讯、案例、项目、教程</p>
+                        <p style="color: #999; font-size: 0.9em;">人物化IP（眼镜博士），深入浅出</p>
+                        <p style="color: #666; margin: 5px 0;">http://xiaohu.ai</p>
+                        <div style="margin-top: 15px;">
+                            <img src="images/7191e495-ff0e-46ac-aeac-ab430f24e26e.jpg" style="width: 100%; border-radius: 8px;" alt="小互AI">
+                        </div>
+                    </div>
+
+                    <div style="flex: 1; min-width: 250px; padding: 20px; border: 1px solid #e0e0e0; border-radius: 12px;">
+                        <h3 style="color: #0066cc; margin-bottom: 10px;">📺 看懂互联网</h3>
+                        <p style="color: #666; margin: 5px 0;">微信公众号：看懂互联网</p>
+                        <p style="color: #333; line-height: 1.6;">hacknews 每日新闻速递</p>
+                        <p style="color: #999; font-size: 0.9em;">技术新闻精选，快速获取行业动态</p>
+                        <p style="color: #999; font-size: 0.9em;">每天为你精选重要的技术新闻和资讯</p>
+                        <div style="margin-top: 15px;">
+                            <img src="images/ab423e9b-2b67-4e4d-ba92-afcdb999a8ba.jpg" style="width: 100%; border-radius: 8px;" alt="HackerNews">
+                        </div>
+                    </div>
+                        <h3 style="color: #0066cc; margin-bottom: 10px;">🎧 小宇宙播客推荐</h3>
+                        <p style="color: #666; margin: 5px 0;">微信公众号：小宇宙播客推荐</p>
+                        <p style="color: #333; line-height: 1.6;">跨国串门儿计划</p>
+                        <p style="color: #999; font-size: 0.9em;">AI 翻译英文播客为中文</p>
+                        <p style="color: #999; font-size: 0.9em;">在翻译的同时保留原有声线，用中文听懂外语播客</p>
+                        <div style="margin-top: 15px;">
+                            <img src="images/701b832e-0fc1-465e-a7ee-ce4e6672465b.png" style="width: 100%; border-radius: 8px;" alt="跨国串门儿计划">
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="divider"></div>
+                <p style="text-align: center; font-size: 26pt; color: #666; margin: 40px 0;">
+                    跟上节奏，发现新工具和技巧！
+                </p>
+            </div>
+                <div class="divider"></div>
+                <div class="two-columns" style="margin-top: 40px;">
+                    <div class="column">
+                        <h3>宝玉AI</h3>
+                        <div style="color: #999; font-size: 22pt; margin: 20px 0;">AI 工具 · 编程技巧</div>
+                    </div>
+                    <div class="column">
+                        <h3>数字生命卡兹克</h3>
+                        <div style="color: #999; font-size: 22pt; margin: 20px 0;">前沿动态 · 工具测评</div>
+                    </div>
+                    <div class="column">
+                        <h3>小互AI</h3>
+                        <div style="color: #999; font-size: 22pt; margin: 20px 0;">AI 资讯 · 项目教程</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 结束 -->
+            <div class="slide" data-slide="16">
+                <h1>vibe coding</h1>
+                <div class="divider"></div>
+                <div class="subtitle">氛围编程</div>
+                <div class="quote" style="text-align: center; font-size: 32pt;">
+                    工具只是开始<br>
+                    持续学习才是关键
+                </div>
+                <div style="text-align: center; font-size: 26pt; color: #0066cc; margin-top: 80px;">
+                    早上手，早受益
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="progress" id="progress"></div>
+    <div class="controls">
+        <button class="control-btn" onclick="prevSlide()">←</button>
+        <button class="control-btn" onclick="nextSlide()">→</button>
+    </div>
+    <div class="slide-number" id="slideNumber">1 / 16</div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+
+        function updateSlide() {
+            slides.forEach((slide, index) => {
+                slide.classList.remove('active', 'prev');
+                if (index === currentSlide) {
+                    slide.classList.add('active');
+                } else if (index < currentSlide) {
+                    slide.classList.add('prev');
+                }
+            });
+
+            const progress = ((currentSlide + 1) / totalSlides) * 100;
+            document.getElementById('progress').style.width = progress + '%';
+            document.getElementById('slideNumber').textContent = (currentSlide + 1) + ' / ' + totalSlides;
+        }
+
+        function nextSlide() {
+            if (currentSlide < totalSlides -1) {
+                currentSlide++;
+                updateSlide();
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                currentSlide--;
+                updateSlide();
+            }
+        }
+
+        function goToSlide(index) {
+            currentSlide = index;
+            updateSlide();
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'Enter') {
+                e.preventDefault();
+                nextSlide();
+            } else if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                prevSlide();
+            } else if (e.key === 'Home') {
+                e.preventDefault();
+                goToSlide(0);
+            } else if (e.key === 'End') {
+                e.preventDefault();
+                goToSlide(totalSlides - 1);
+            }
+        });
+
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        document.addEventListener('touchstart', (e) => {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        document.addEventListener('touchend', (e) => {
+            touchEndX = e.changedTouches[0].screenX;
+            handleSwipe();
+        });
+
+        function handleSwipe() {
+            const swipeThreshold = 50;
+            const diff = touchStartX - touchEndX;
+
+            if (Math.abs(diff) > swipeThreshold) {
+                if (diff > 0) {
+                    nextSlide();
+                } else {
+                    prevSlide();
+                }
+            }
+        }
+
+        updateSlide();
+    </script>
+</body>
+</html>
