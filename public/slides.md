@@ -147,3 +147,25 @@ AI 原生 IDE，基于 VS Code
 工具只是开始
 
 持续学习才是关键
+
+---
+
+## 扫码获取完整演讲稿
+
+![演讲稿二维码](/presentation/images/qrcode-readme.png)
+
+---
+
+## 详细内容包含
+
+- 完整演讲稿
+- 工具详细介绍
+- OpenClaw 实战案例
+- CLAUDE.MD 最佳实践
+- 推荐关注列表
+
+---
+
+## 谢谢
+
+期待与你一起开启 vibe coding 之旅
