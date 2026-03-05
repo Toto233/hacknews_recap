@@ -57,3 +57,13 @@ html[data-theme="dark"] {
 .active-nav {
   @apply underline decoration-wavy decoration-2 underline-offset-4;
 }
+
+/* Presentation 页面图片统一样式 */
+main img {
+  width: 500px;
+  height: auto;
+  display: block;
+  margin: 20px auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
