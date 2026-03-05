@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vibe coding - 氛围编程</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4/dist/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4/theme/white.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4/plugin/highlight/monokai.css">
+    <style>
+        .reveal {
+            font-family: 'PingFang SC', 'Source Han Sans CN', 'Microsoft YaHei', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        .reveal h1 {
+            color: #0066cc;
+            font-size: 2.5em;
+        }
+
+        .reveal h2 {
+            color: #1a1a1a;
+            font-size: 2em;
+        }
+
+        .reveal h3 {
+            color: #333333;
+            font-size: 1.5em;
+        }
+
+        .reveal li {
+            font-size: 1.1em;
+            line-height: 1.5;
+            margin: 0.3em 0;
+        }
+
+        .reveal strong {
+            color: #0066cc;
+            font-weight: bold;
+        }
+
+        .reveal blockquote {
+            background: #f8f8f8;
+            border-left: 4px solid #0066cc;
+            padding: 20px;
+            color: #333;
+            font-style: italic;
+        }
+
+        .reveal img {
+            max-width: 60%;
+            max-height: 300px;
+            margin: 20px auto;
+            display: block;
+            border-radius: 8px;
+        }
+
+        .reveal p {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="reveal">
+        <div class="slides">
+            <section data-markdown="slides.md" data-separator="^\n---\n$" data-separator-vertical="^\n--\n$"></section>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4/dist/reveal.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4/plugin/markdown/markdown.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4/plugin/highlight/highlight.js"></script>
+
+    <script>
+        Reveal.initialize({
+            plugins: [RevealMarkdown, RevealHighlight],
+            hash: true,
+            slideNumber: true,
+            transition: 'slide',
+            transitionSpeed: 'default',
+            center: true,
+            margin: 0.1,
+            minScale: 0.2,
+            maxScale: 2.0,
+            keyboard: true,
+            touch: true
+        });
+    </script>
+</body>
+</html>
