@@ -1,6 +1,11 @@
-/* Presentation 页面图片统一样式 */
-main img {
+/* Presentation 页面图片统一样式
+   - 统一宽度 500px，高度自适应
+   - 同时避免在手机端溢出
+*/
+
+.presentation-content img {
   width: 500px;
+  max-width: 100%;
   height: auto;
   display: block;
   margin: 20px auto;

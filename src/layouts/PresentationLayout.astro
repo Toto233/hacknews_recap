@@ -1,0 +1,15 @@
+---
+import Layout from "@/layouts/Layout.astro";
+// 仅给 /presentation/* 的 Markdown 页面用的样式（统一图片尺寸等）
+import "@/pages/presentation/presentation.css";
+
+const { title = "Presentation" } = Astro.props;
+---
+
+<Layout title={title}>
+  <main>
+    <article class="presentation-content">
+      <slot />
+    </article>
+  </main>
+</Layout>

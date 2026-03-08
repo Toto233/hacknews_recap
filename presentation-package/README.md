@@ -1,8 +1,3 @@
----
-layout: ../../layouts/PresentationLayout.astro
-title: vibe coding 演讲稿
----
-
 # vibe coding 氛围编程
 
 ## 项目信息
