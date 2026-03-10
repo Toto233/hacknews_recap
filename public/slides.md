@@ -9,83 +9,78 @@
 
 ## 核心理念
 
-早上手，早受益
+- **早上手，早受益**
+- 工具的复利效应
+- 做自己真正用的东西（吃自己的狗粮）
+- 真正提高生产力：学会跟机器配合
 
 ---
 
-## 核心理念
+## 不是什么
 
-工具的复利效应
-
----
-
-## 核心理念
-
-做自己真正用的东西
+- ❌ 完美主义
+- ❌ 炫技式项目
+- ❌ 为了学而学
 
 ---
 
-## 三大核心工具
+## 工具生态时间线
 
-![Cursor](/presentation/images/cursor.png)
+把工具按「过去 / 现在 / 未来」来理解，会更清楚：
+
+- **过去：Cursor + Trae**（AI IDE / 10x 工程师）
+- **现在：Claude Code + Codex CLI**（终端里的编程搭档，工程闭环）
+- **未来：OpenClaw**（从“写代码”到“管生活”）
+
+---
+
+## 过去：Cursor + Trae
+
+**关键词：** IDE 里把 AI 变强，把写代码这件事加速
 
 ---
 
 ## Cursor
 
-AI 原生 IDE，基于 VS Code
+![Cursor](/presentation/images/cursor.png)
 
----
-
-## 三大核心工具
-
-![Trae](/presentation/images/trae.png)
+AI 原生 IDE（基于 VS Code）
 
 ---
 
 ## Trae
 
-你的 10x AI 工程师
+![Trae](/presentation/images/trae.png)
+
+你的 10x AI 工程师（端到端交付）
 
 ---
 
-## 三大核心工具
+## 现在：Claude Code + Codex CLI
 
-![Claude Code](/presentation/images/claude.png)
+**关键词：** 终端里的工程师搭档（读仓库 / 跑命令 / 生成 diff / 跑测试）
 
 ---
 
 ## Claude Code
 
-真正的编程搭档
+![Claude Code](/presentation/images/claude.png)
+
+真正的编程搭档（理解上下文 + 贴近工程流程）
 
 ---
 
-## 实际效果
+## Codex CLI
 
-![NVIDIA](/presentation/images/nvidia.png)
+OpenAI 的命令行编程助手
 
----
-
-## NVIDIA
-
-40,000 工程师全面使用
+- 快速理解仓库、定位问题
+- 跑测试/构建 → 根据输出迭代修复
+- 产出可审阅的 diff / PR 说明
 
 ---
 
-## 实际效果
-
-![Salesforce](/presentation/images/salesforce.png)
-
----
-
-## Salesforce
-
-90% 开发者使用，生产力双位数提升
-
----
-
-## OpenClaw
+## 未来：OpenClaw
 
 从 IDE 到个人助理
 
@@ -99,7 +94,7 @@ AI 原生 IDE，基于 VS Code
 
 ## 真实案例
 
-从"搞坏 WSL"到"离不开 Dr.Two"
+从「搞坏 WSL」到「离不开 Dr.Two」
 
 ---
 
@@ -107,65 +102,25 @@ AI 原生 IDE，基于 VS Code
 
 及时更新，固化知识
 
----
-
-## 推荐：宝玉AI
-
-![宝玉AI](/presentation/images/b8d513cb-c453-4dc9-9e69-e7fed0bc73a6.webp)
+- 好用工具 → 写进 `TOOLS.md`
+- 新技巧 → 写进 `AGENTS.md`
+- 解决方案/踩坑 → 写进 `MEMORY.md`
 
 ---
 
-## 推荐：数字生命卡兹克
+## 推荐关注
 
-![数字生命卡兹克](/presentation/images/d3d26763-262f-429f-a580-e163be772258.jpg)
-
----
-
-## 推荐：小互AI
-
-![小互AI](/presentation/images/7191e495-ff0e-46ac-aeac-ab430f24e26e.jpg)
+- 宝玉AI
+- 数字生命卡兹克
+- 小互AI
+- 看懂互联网
+- 跨国串门儿计划
 
 ---
 
-## 推荐：看懂互联网
-
-![HackerNews](/presentation/images/ab423e9b-2b67-4e4d-ba92-afcdb999a8ba.jpg)
-
----
-
-## 推荐：跨国串门儿计划
-
-![跨国串门儿计划](/presentation/images/701b832e-0fc1-465e-a7ee-ce4e6672465b.png)
-
----
-
-# vibe coding
-
-早上手，早受益
-
-让工具尽早形成复利
-
----
-
-工具只是开始
+## 工具只是开始
 
 持续学习才是关键
-
----
-
-## 扫码获取完整演讲稿
-
-![演讲稿二维码](/presentation/images/qrcode-readme.png)
-
----
-
-## 详细内容包含
-
-- 完整演讲稿
-- 工具详细介绍
-- OpenClaw 实战案例
-- CLAUDE.MD 最佳实践
-- 推荐关注列表
 
 ---
 
