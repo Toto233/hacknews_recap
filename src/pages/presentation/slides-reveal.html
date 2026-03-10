@@ -4,8 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>vibe coding - 氛围编程</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4/dist/reveal.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@4/theme/white.css">
+    <link rel="stylesheet" href="/vendor/revealjs/reveal.css">
+    <link rel="stylesheet" href="/vendor/revealjs/white.css">
     <style>
         .reveal {
             font-family: 'PingFang SC', 'Source Han Sans CN', 'Microsoft YaHei', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -92,15 +92,26 @@
                 </ul>
             </section>
 
-            <!-- Slide 4: 工具生态 -->
+            <!-- Slide 4: 工具生态时间线 -->
             <section>
-                <h2>工具生态概览</h2>
-                <p><strong>三大核心工具：</strong></p>
-                <ol>
-                    <li><strong>Cursor</strong> - AI 原生 IDE</li>
-                    <li><strong>Trae</strong> - 你的 10x AI 工程师</li>
-                    <li><strong>Claude Code</strong> - 编程搭档</li>
-                </ol>
+                <h2>工具生态时间线</h2>
+                <p>把工具按<strong>过去 / 现在 / 未来</strong>来理解，会更清楚：</p>
+                <ul>
+                    <li><strong>过去：</strong>Cursor + Trae（AI IDE / 10x 工程师）</li>
+                    <li><strong>现在：</strong>Claude Code + Codex CLI（终端里的编程搭档，工程闭环）</li>
+                    <li><strong>未来：</strong>OpenClaw（从“写代码”到“管生活”）</li>
+                </ul>
+            </section>
+
+            <!-- Slide 4.5: 过去（总览） -->
+            <section>
+                <h2>过去：Cursor + Trae</h2>
+                <p><strong>关键词：</strong>IDE 里把 AI 变强，把写代码这件事加速</p>
+                <ul>
+                    <li>低门槛：上手快、立刻见效</li>
+                    <li>高频：日常写代码随时用</li>
+                    <li>适合：原型 / 日常迭代 / 中大型项目</li>
+                </ul>
             </section>
 
             <!-- Slide 5: Cursor -->
@@ -132,7 +143,7 @@
 
             <!-- Slide 7: Trae -->
             <section>
-                <h2>Trae - 你的 10x AI 工程师</h2>
+                <h2>Trae - 你的 10x AI 工程师（过去）</h2>
                 <p><strong>定位：</strong></p>
                 <p style="font-size: 1.3em;">Understand. Execute. Deliver.</p>
                 <ul>
@@ -146,7 +157,17 @@
                 </ul>
             </section>
 
-            <!-- Slide 8: Claude Code -->
+            <!-- Slide 8: 现在（总览） -->
+            <section>
+                <h2>现在：Claude Code + Codex CLI</h2>
+                <p><strong>关键词：</strong>终端里的工程师搭档（读仓库 / 跑命令 / 生成 diff / 跑测试）</p>
+                <ul>
+                    <li>更贴近团队工程流程：命令 + diff + 验证闭环</li>
+                    <li>适合：修 bug、重构、做可复现的改动</li>
+                </ul>
+            </section>
+
+            <!-- Slide 9: Claude Code -->
             <section>
                 <h2>Claude Code - 为什么选择它？</h2>
                 <p><strong>独特优势：</strong></p>
@@ -157,7 +178,7 @@
                 </ul>
             </section>
 
-            <!-- Slide 9: Claude Code 实践 -->
+            <!-- Slide 10: Claude Code 实践 -->
             <section>
                 <h2>Claude Code - 最佳实践</h2>
                 <ul>
@@ -167,7 +188,20 @@
                 </ul>
             </section>
 
-            <!-- Slide 10: CLAUDE.MD -->
+            <!-- Slide 11: Codex CLI -->
+            <section>
+                <h2>Codex CLI（现在）</h2>
+                <p><strong>是什么：</strong>OpenAI 的命令行编程助手（终端里读/改代码、跑命令、生成补丁）</p>
+                <p><strong>适用场景：</strong></p>
+                <ul>
+                    <li>快速理解仓库、定位问题</li>
+                    <li>跑测试/构建 → 根据输出迭代修复</li>
+                    <li>产出可审阅的 diff / PR 说明</li>
+                </ul>
+                <p><strong>一句话：</strong>更强调「工程闭环」而不是“只写几段代码”。</p>
+            </section>
+
+            <!-- Slide 12: CLAUDE.MD -->
             <section>
                 <h2>💡 CLAUDE.MD 文件的重要性</h2>
                 <p><strong>CLAUDE.MD 是 Claude Code 的"大脑"，写得越精确，效果越好。</strong></p>
@@ -192,9 +226,9 @@
                 </ul>
             </section>
 
-            <!-- Slide 12: OpenClaw 介绍 -->
+            <!-- Slide 13: 未来：OpenClaw 介绍 -->
             <section>
-                <h2>OpenClaw - 从 IDE 到个人助理</h2>
+                <h2>未来：OpenClaw - 从 IDE 到个人助理</h2>
                 <blockquote>
                     <p>Claude Code 帮你写代码，OpenClaw 帮你做一切。</p>
                 </blockquote>
@@ -324,7 +358,7 @@
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/reveal.js@4/dist/reveal.js"></script>
+    <script src="/vendor/revealjs/reveal.js"></script>
     <script>
         Reveal.initialize({
             hash: true,
