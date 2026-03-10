@@ -183,7 +183,9 @@ title: vibe coding 演讲稿
 2. **快速上手**（今天就用起来）
 3. **深入使用**（把工作流写进规则和文档里）
 
-### 4.1 把 3.4 融进来：立刻去问你的大模型
+---
+
+## 5. 或者让AI提建议
 
 同一个 Prompt，不同的人，会得到完全不同的答案。
 
@@ -253,77 +255,3 @@ title: vibe coding 演讲稿
 **记住：工具只是开始，持续学习才是关键。**
 
 ---
-
-## 附录：Claude Code 提效要点（CLAUDE.MD）
-
-> 想把 Claude Code 用到“像团队成员”，就要把规则写进 CLAUDE.MD。
-
-### A.1 CLAUDE.MD 的关键原则
-
-1) **明确技术栈和约定**
-```
-❌ 错误：使用测试框架
-✅ 正确：使用 pytest，测试文件命名规范为 test_*.py
-```
-
-2) **指定工具和命令**
-```
-❌ 错误：运行测试
-✅ 正确：运行 pytest -v --cov=src
-```
-
-3) **代码风格约定**
-```
-❌ 错误：遵循 PEP 8
-✅ 正确：使用 black 格式化，line length = 88，import 排序使用 isort
-```
-
-4) **项目结构说明**
-```
-项目结构：
-- src/ 源代码
-- tests/ 测试代码
-- docs/ 文档
-- scripts/ 脚本工具
-```
-
-### A.2 版本控制安全原则
-
-- ⚠️ 禁止自动 commit/push
-- ⚠️ 先显示 diff，等待确认
-- ⚠️ 修改前先创建分支
-
-（下面保留一个可直接复制的示例）
-
-```markdown
-# 项目说明
-
-## 技术栈
-- Python 3.11
-- FastAPI 0.104+
-- PostgreSQL 15
-
-## 开发约定
-
-### 测试
-- 使用 pytest
-- 测试覆盖率目标：80%+
-- 测试命令：pytest -v --cov=src
-
-### 代码风格
-- Black formatter (line length = 88)
-- isort for imports
-- 类型检查：mypy src/
-
-### 版本控制
-- ⚠️ 禁止自动 commit/push
-- ⚠️ 任何 git 操作前必须获得明确授权
-- ⚠️ 修改前先创建分支
-- ⚠️ commit 前显示完整 diff 等待确认
-
-### 项目结构
-- src/ 核心代码
-- tests/ 测试代码
-- scripts/ 工具脚本
-- docs/ 文档
-```
