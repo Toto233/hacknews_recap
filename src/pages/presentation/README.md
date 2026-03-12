@@ -145,11 +145,12 @@ title: vibe coding 演讲稿
 
 以及另一个更“反直觉”的案例：把学习也做成 vibe coding。
 
-- **Macroeconomics-for-Dummies-study**：把学习过程 repo 化
-  - 结构化目录：`progress/`、`summaries/`、`sessions/`
-  - 用 `AGENTS.md` 固化“学习助教”的方法论（苏格拉底式提问、理解检查、输出规范）
-  - 目标是把一次次对话沉淀成可复用材料：章节摘要 / 自测题 / 复习块
+- **Macroeconomics-for-Dummies-study（开源）**：用 **Codex / Claude Code** 把“学习一本书”工程化
+  - 过程 repo 化：`progress/`、`summaries/`、`sessions/`
+  - 仓库里有一个 `AGENTS.md`，可以直接复刻（学习助教的角色、提问方式、输出标准）
+  - 每次学习都沉淀可复用产物：章节摘要 / 自测题 / 复习块
 - 仓库： https://github.com/Toto233/Macroeconomics-for-Dummies-study
+- 灵感来源（学习资料补充）：https://github.com/chenran818/CFP-Study/blob/main/CLAUDE.md
 
 （配图：把“学习也做成工程”的一个小例子——GDP 统计口径里，卖不掉的产出会作为“存货投资”计入 GDP。）
 
