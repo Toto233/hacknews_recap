@@ -98,6 +98,19 @@ OpenAI 的命令行编程助手
 
 ---
 
+## 真实案例：用 vibe coding 把“学习”也做成工程
+
+项目：Macroeconomics-for-Dummies-study
+
+- 把学习变成一个可迭代的 repo（进度/总结/会话记录）
+- 用 `AGENTS.md` 把“学习助教”的角色、流程、输出标准写死
+- 每次学习都留下可复用的产物：outline / quiz / revision block
+
+仓库：
+https://github.com/Toto233/Macroeconomics-for-Dummies-study
+
+---
+
 ## 模型切换：GLM-4.7 → ChatGPT 5.2
 
 **同一套指令，换模型后“性格”会明显变：**

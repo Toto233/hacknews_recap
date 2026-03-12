@@ -143,6 +143,14 @@ title: vibe coding 演讲稿
 
 #### 3.3.3 真实案例：从「搞坏 WSL」到安卓手机上的 Dr.Two
 
+以及另一个更“反直觉”的案例：把学习也做成 vibe coding。
+
+- **Macroeconomics-for-Dummies-study**：把学习过程 repo 化
+  - 结构化目录：`progress/`、`summaries/`、`sessions/`
+  - 用 `AGENTS.md` 固化“学习助教”的方法论（苏格拉底式提问、理解检查、输出规范）
+  - 目标是把一次次对话沉淀成可复用材料：章节摘要 / 自测题 / 复习块
+- 仓库： https://github.com/Toto233/Macroeconomics-for-Dummies-study
+
 我从今年 2 月初开始用 OpenClaw，到现在刚好一个月。
 
 - **第一世：WSL Ubuntu**
@@ -214,6 +222,7 @@ title: vibe coding 演讲稿
 
 - Cursor: https://cursor.com/cn
 - Trae: https://www.trae.cn/
+- 微信公众号文章： https://mp.weixin.qq.com/s/bO-Tq4w5YG5jrayzzyJTAA
 
 ## 推荐关注
 
