@@ -151,6 +151,10 @@ title: vibe coding 演讲稿
   - 目标是把一次次对话沉淀成可复用材料：章节摘要 / 自测题 / 复习块
 - 仓库： https://github.com/Toto233/Macroeconomics-for-Dummies-study
 
+（配图：把“学习也做成工程”的一个小例子——GDP 统计口径里，卖不掉的产出会作为“存货投资”计入 GDP。）
+
+![GDP/Inventory 例子：卖不掉也会计入 GDP](/presentation/images/macro-gdp-inventory.png)
+
 我从今年 2 月初开始用 OpenClaw，到现在刚好一个月。
 
 - **第一世：WSL Ubuntu**
