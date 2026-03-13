@@ -280,3 +280,9 @@ title: vibe coding 演讲稿
 **记住：工具只是开始，持续学习才是关键。**
 
 ---
+
+## 彩蛋：当你对 AI 说“别问，直接干”
+
+![彩蛋：no](/presentation/images/easter-claude-no.png)
+
+---
