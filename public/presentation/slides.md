@@ -232,7 +232,12 @@ https://github.com/Toto233/Macroeconomics-for-Dummies-study
 
 ---
 
-### 跨国串门儿计划
+### 🌍 跨国串门儿计划
+
+内容：这是一档使用 AI 技术来将英文播客翻译为中文播客的节目～在翻译的同时，也能保留原有声线，用中文听懂外语播客！
+
+特点：
+- AI 翻译英文播客为中文
 
 ![跨国串门儿计划](/presentation/images/701b832e-0fc1-465e-a7ee-ce4e6672465b.png)
 
