@@ -95,9 +95,7 @@ https://github.com/Toto233/Macroeconomics-for-Dummies-study
 
 ---
 
-## Claude / Codex 讲解示例：存货也会计入 GDP
-
-![GDP/Inventory 例子](/presentation/images/macro-gdp-inventory.png)
+![](/presentation/images/macro-gdp-inventory.png)
 
 ---
 
