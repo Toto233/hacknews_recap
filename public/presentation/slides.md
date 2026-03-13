@@ -82,6 +82,27 @@
 
 ---
 
+## Claude / Codex 当老师：学习也能 vibe coding
+
+项目：**Macroeconomics-for-Dummies-study（开源）**
+
+- 让 Claude/Codex 充当「助教」：提问 → 讲解 → 追问 → 小测
+- 学习过程 repo 化：`progress/` `summaries/` `sessions/`
+- 用 `AGENTS.md` 固化学习助教角色、提问方式、输出标准
+
+仓库：
+https://github.com/Toto233/Macroeconomics-for-Dummies-study
+
+---
+
+## Claude / Codex 讲解示例：存货也会计入 GDP
+
+（GDP 统计口径里，卖不掉的产出会作为“存货投资”计入 GDP）
+
+![GDP/Inventory 例子](/presentation/images/macro-gdp-inventory.png)
+
+---
+
 ## vibe coding 最佳实践：把 AI 变成可复利系统
 
 - 先跑起来，再迭代
@@ -133,26 +154,6 @@
 
 ---
 
-## 真实案例：把学习也做成 vibe coding
-
-项目：**Macroeconomics-for-Dummies-study（开源）**
-
-- 学习过程 repo 化：`progress/` `summaries/` `sessions/`
-- `AGENTS.md` 固化学习助教角色、提问方式、输出标准
-- 每次学习沉淀可复用产物：摘要 / 自测题 / 复习块
-
-仓库：
-https://github.com/Toto233/Macroeconomics-for-Dummies-study
-
----
-
-## 配图：卖不掉也会计入 GDP
-
-（GDP 统计口径里，卖不掉的产出会作为“存货投资”计入 GDP）
-
-![GDP/Inventory 例子](/presentation/images/macro-gdp-inventory.png)
-
----
 
 ## 真实案例：从「搞坏 WSL」到安卓 Termux（Dr.Two）
 
