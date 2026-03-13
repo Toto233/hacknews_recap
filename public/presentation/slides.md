@@ -116,6 +116,12 @@
 
 ---
 
+## OpenClaw：把“助理”装进手机里
+
+![OpenClaw Habitat](/presentation/images/openclaw-habitat.png)
+
+---
+
 ## 模型切换：GLM-4.7 → ChatGPT 5.2
 
 同一套用法，换模型后“性格”明显变：
