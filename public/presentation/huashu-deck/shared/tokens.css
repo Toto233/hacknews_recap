@@ -86,17 +86,21 @@ body.dark .kicker { color: #7eb1f1; }
   font-family: var(--serif);
   font-size: 36px;
   line-height: 1.52;
-  max-width: 1280px;
+  max-width: 1460px;
   color: var(--muted);
 }
 body.dark .lead { color: rgba(245,247,251,.82); }
 .body {
   font-size: 30px;
   line-height: 1.72;
-  max-width: 1320px;
+  max-width: 1440px;
   color: var(--muted);
 }
 body.dark .body { color: rgba(245,247,251,.82); }
+.measure-wide { max-width: 1460px; }
+.measure-medium { max-width: 1280px; }
+.measure-narrow { max-width: 1080px; }
+.measure-tight { max-width: 880px; }
 .rule {
   width: 160px;
   height: 3px;
