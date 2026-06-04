@@ -124,7 +124,7 @@ Project Genie网页应用整合Genie 3、Nano Banana Pro和Gemini三大引擎，
 
 ## 6. 苹果iOS版Patreon狠抽30%分成！创作者收入大危机 (Apple to soon take up to 30% cut from all Patreon creators in iOS app)
 
-![苹果iOS版Patreon狠抽30%分成！创作者收入大危机 ](D:\python\hacknews\output\images\20260130\Apple_to_soon_take_up_to_30%_cut_from_all_Patreon_.png)
+![苹果iOS版Patreon狠抽30%分成！创作者收入大危机 ](D:\python\hacknews\output\images\20260130\Apple_to_soon_take_up_to_30%25_cut_from_all_Patreon_.png)
 
 苹果即将对iOS版Patreon应用收取高达30%的分成，这对创作者们来说是个新鲜挑战，却也凸显了数字经济的新玩法！据TechCrunch报道，苹果已将截止日期定为2026年11月1日，所有Patreon创作者必须从平台的旧版计费系统转向App Store的内购系统，否则iPhone/iPad版应用恐遭下架。此前苹果原计划2025年11月强制执行，但宽限了一年。
 

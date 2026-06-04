@@ -2,7 +2,7 @@
 title: '加州拟豁免 Linux，不再强制系统级年龄验证 | Hacker News 摘要 (2026-05-26)'
 author: 'hacknews'
 description: ''
-digest: 'Tom's Hardware 报道称，加州立法者正在修改此前引发 Linux 和开源社区强烈反弹的年龄验证法案。原来的 Digital Age Assurance Act 试图把在线年龄验证从网站和应用下沉到操作系统层面，要求系统在设备设置'
+digest: 'Tom''s Hardware 报道称，加州立法者正在修改此前引发 Linux 和开源社区强烈反弹的年龄验证法案。原来的 Digital Age Assurance Act 试图把在线年龄验证从网站和应用下沉到操作系统层面，要求系统在设备设置'
 source_url: 'https://www.tomshardware.com/software/linux/california-moves-to-exempt-linux-from-its-upcoming-age-verification-law-after-backlash-over-forcing-operating-systems-to-collect-users-ages-amendment-proposed-by-the-same-lawmaker-who-wrote-the-original-law'
 pubDatetime: 2026-05-26 20:27:34.218+08:00
 tags:
