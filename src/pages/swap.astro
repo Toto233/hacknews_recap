@@ -1,0 +1,917 @@
+---
+import Layout from "@/layouts/Layout.astro";
+---
+
+<Layout
+  title="乱码颠倒工具"
+  description="纯浏览器本地运行的文字 / 图片乱码颠倒生成器。"
+  faviconHref="/swap-favicon.svg"
+>
+  <main class="swap-app">
+    <section class="swap-hero" aria-labelledby="swap-title">
+      <div>
+        <p class="swap-kicker">Local Canvas Tool</p>
+        <h1 id="swap-title">乱码颠倒工具</h1>
+        <p class="swap-lede">
+          输入文字或上传图片，在当前浏览器中生成旋转、颠倒、彩色混乱线条效果，并导出
+          PNG / JPEG。
+        </p>
+      </div>
+      <div class="privacy-note">
+        所有图片和文字都只在当前浏览器中处理，不会上传到服务器。
+      </div>
+    </section>
+
+    <section class="workspace" aria-label="乱码颠倒工具工作区">
+      <div class="controls-panel">
+        <div class="mode-tabs" role="tablist" aria-label="模式选择">
+          <button class="mode-tab active" type="button" data-mode="text">
+            文字模式
+          </button>
+          <button class="mode-tab" type="button" data-mode="image">
+            图片模式
+          </button>
+        </div>
+
+        <form id="text-panel" class="panel-section">
+          <label class="field">
+            <span>输入文字</span>
+            <textarea
+              id="text-input"
+              rows="5"
+              placeholder="今天 weather is so hot，我想 drink water"
+              >今天 weather is so hot，我想 drink water</textarea
+            >
+          </label>
+
+          <label class="field">
+            <span>排版模式</span>
+            <select id="layout-mode">
+              <option value="smart" selected>智能混排</option>
+              <option value="classic">经典乱码</option>
+              <option value="compact">紧凑模式</option>
+            </select>
+          </label>
+
+          <div class="field-grid">
+            <label class="field">
+              <span>线条数量</span>
+              <input
+                id="text-lines"
+                type="number"
+                min="0"
+                max="300"
+                value="30"
+              />
+            </label>
+            <label class="field">
+              <span>画布比例</span>
+              <select id="canvas-ratio">
+                <option value="phone" selected>手机竖图 9:16</option>
+                <option value="story">社交竖图 3:4</option>
+                <option value="auto">内容自适应</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="actions">
+            <button id="generate-text" class="primary-btn" type="button">
+              生成文字图
+            </button>
+            <button id="download-text" class="secondary-btn" type="button">
+              下载 PNG
+            </button>
+          </div>
+        </form>
+
+        <form id="image-panel" class="panel-section hidden">
+          <label class="field">
+            <span>上传图片</span>
+            <input
+              id="image-input"
+              type="file"
+              accept="image/png,image/jpeg,image/webp"
+            />
+          </label>
+
+          <div class="field-grid">
+            <label class="field">
+              <span>最大宽度</span>
+              <input
+                id="max-width"
+                type="number"
+                min="320"
+                max="3000"
+                value="2000"
+              />
+            </label>
+            <label class="field">
+              <span>导出质量</span>
+              <input
+                id="jpeg-quality"
+                type="number"
+                min="0.35"
+                max="1"
+                step="0.05"
+                value="0.85"
+              />
+            </label>
+          </div>
+
+          <label class="field">
+            <span>线条数量</span>
+            <input
+              id="image-lines"
+              type="number"
+              min="0"
+              max="500"
+              value="120"
+            />
+          </label>
+
+          <div class="actions">
+            <button id="generate-image" class="primary-btn" type="button">
+              生成倒置图
+            </button>
+            <button id="download-image" class="secondary-btn" type="button">
+              下载 JPEG
+            </button>
+          </div>
+        </form>
+
+        <p id="status" class="status" role="status">准备就绪</p>
+      </div>
+
+      <div class="preview-panel">
+        <div class="preview-head">
+          <div>
+            <p class="swap-kicker">Preview</p>
+            <h2>Canvas 预览</h2>
+          </div>
+          <span id="canvas-size">-</span>
+        </div>
+        <div class="canvas-frame">
+          <canvas id="result-canvas" width="720" height="1280"></canvas>
+        </div>
+        <p class="mobile-tip">iPhone Safari 如未直接下载，可长按预览图保存。</p>
+      </div>
+    </section>
+  </main>
+</Layout>
+
+<style>
+  :global(body) {
+    background: #f4f0e8;
+  }
+
+  .swap-app {
+    min-height: 100vh;
+    padding: clamp(20px, 4vw, 48px);
+    color: #171717;
+    font-family:
+      ui-sans-serif,
+      system-ui,
+      -apple-system,
+      BlinkMacSystemFont,
+      "Segoe UI",
+      sans-serif;
+  }
+
+  .swap-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(240px, 360px);
+    gap: 24px;
+    max-width: 1180px;
+    margin: 0 auto 24px;
+    align-items: end;
+  }
+
+  .swap-kicker {
+    margin: 0 0 8px;
+    color: #6a6258;
+    font-family:
+      ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .swap-hero h1 {
+    margin: 0;
+    font-size: clamp(38px, 8vw, 86px);
+    line-height: 0.95;
+    font-weight: 900;
+    letter-spacing: 0;
+  }
+
+  .swap-lede {
+    max-width: 760px;
+    margin: 18px 0 0;
+    color: #4a443d;
+    font-size: 17px;
+    line-height: 1.75;
+  }
+
+  .privacy-note {
+    border: 2px solid #171717;
+    background: #fffdf8;
+    padding: 18px;
+    font-size: 15px;
+    line-height: 1.6;
+    font-weight: 700;
+  }
+
+  .workspace {
+    display: grid;
+    grid-template-columns: minmax(300px, 380px) minmax(0, 1fr);
+    gap: 20px;
+    max-width: 1180px;
+    margin: 0 auto;
+  }
+
+  .controls-panel,
+  .preview-panel {
+    border: 2px solid #171717;
+    background: #fffdf8;
+  }
+
+  .controls-panel {
+    padding: 16px;
+  }
+
+  .mode-tabs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+
+  .mode-tab,
+  .primary-btn,
+  .secondary-btn,
+  select,
+  input,
+  textarea {
+    border: 2px solid #171717;
+    border-radius: 0;
+    font: inherit;
+  }
+
+  .mode-tab,
+  .primary-btn,
+  .secondary-btn {
+    min-height: 44px;
+    padding: 10px 12px;
+    background: #fffdf8;
+    color: #171717;
+    font-weight: 800;
+  }
+
+  .mode-tab.active,
+  .primary-btn {
+    background: #171717;
+    color: #fffdf8;
+  }
+
+  .mode-tab:hover,
+  .primary-btn:hover,
+  .secondary-btn:hover {
+    transform: translateY(-1px);
+  }
+
+  .panel-section {
+    display: grid;
+    gap: 14px;
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  .field {
+    display: grid;
+    gap: 7px;
+    font-size: 14px;
+    font-weight: 800;
+  }
+
+  .field span {
+    color: #3d362f;
+  }
+
+  textarea,
+  select,
+  input {
+    width: 100%;
+    box-sizing: border-box;
+    background: #ffffff;
+    color: #171717;
+    padding: 10px 12px;
+    font-size: 15px;
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 120px;
+    line-height: 1.6;
+  }
+
+  .field-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-top: 4px;
+  }
+
+  .status {
+    min-height: 22px;
+    margin: 14px 0 0;
+    color: #6a201b;
+    font-size: 14px;
+    line-height: 1.55;
+  }
+
+  .preview-panel {
+    min-width: 0;
+    padding: 16px;
+  }
+
+  .preview-head {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 12px;
+  }
+
+  .preview-head h2 {
+    margin: 0;
+    font-size: 22px;
+    line-height: 1.2;
+  }
+
+  #canvas-size {
+    color: #6a6258;
+    font-family:
+      ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+    font-size: 12px;
+  }
+
+  .canvas-frame {
+    display: grid;
+    place-items: center;
+    min-height: 440px;
+    overflow: auto;
+    border: 1px solid #c9beb0;
+    background:
+      linear-gradient(45deg, #eee5d8 25%, transparent 25%),
+      linear-gradient(-45deg, #eee5d8 25%, transparent 25%),
+      linear-gradient(45deg, transparent 75%, #eee5d8 75%),
+      linear-gradient(-45deg, transparent 75%, #eee5d8 75%);
+    background-color: #fffaf0;
+    background-position:
+      0 0,
+      0 10px,
+      10px -10px,
+      -10px 0;
+    background-size: 20px 20px;
+  }
+
+  canvas {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    background: #ffffff;
+  }
+
+  .mobile-tip {
+    margin: 12px 0 0;
+    color: #6a6258;
+    font-size: 13px;
+  }
+
+  @media (max-width: 860px) {
+    .swap-app {
+      padding: 16px;
+    }
+
+    .swap-hero,
+    .workspace {
+      grid-template-columns: 1fr;
+    }
+
+    .canvas-frame {
+      min-height: 300px;
+    }
+  }
+
+  @media (max-width: 520px) {
+    .field-grid,
+    .actions {
+      grid-template-columns: 1fr;
+    }
+
+    .preview-head {
+      align-items: start;
+      flex-direction: column;
+    }
+  }
+</style>
+
+<script is:inline>
+  const canvas = document.getElementById("result-canvas");
+  const ctx = canvas.getContext("2d");
+  const statusEl = document.getElementById("status");
+  const canvasSizeEl = document.getElementById("canvas-size");
+  const imageInput = document.getElementById("image-input");
+
+  let currentImageBitmap = null;
+
+  const config = {
+    padding: 40,
+    tokenGap: 16,
+    rowGapRatio: 0.5,
+    segmentGap: 8,
+    topChaosHeight: 80,
+    maxTextFontSize: 64,
+    backgroundColor: "#ffffff",
+    textColor: "#000000",
+  };
+
+  function setStatus(message) {
+    statusEl.textContent = message;
+  }
+
+  function updateCanvasSize() {
+    canvasSizeEl.textContent = `${canvas.width} x ${canvas.height}`;
+  }
+
+  function switchMode(mode) {
+    document.querySelectorAll(".mode-tab").forEach(button => {
+      button.classList.toggle("active", button.dataset.mode === mode);
+    });
+    document
+      .getElementById("text-panel")
+      .classList.toggle("hidden", mode !== "text");
+    document
+      .getElementById("image-panel")
+      .classList.toggle("hidden", mode !== "image");
+    setStatus(mode === "text" ? "文字模式准备就绪" : "图片模式准备就绪");
+  }
+
+  function clearCanvas(width = 720, height = 1280) {
+    canvas.width = width;
+    canvas.height = height;
+    ctx.fillStyle = config.backgroundColor;
+    ctx.fillRect(0, 0, width, height);
+    updateCanvasSize();
+  }
+
+  function tokenizeText(text, mode) {
+    const rawTokens = [];
+    const regex = /[\p{Script=Han}]+|[a-zA-Z0-9]+|[0-9]+|[^\s]/gu;
+    let match;
+
+    while ((match = regex.exec(text)) !== null) {
+      const value = match[0];
+
+      if (/^[\p{Script=Han}]+$/u.test(value)) {
+        if (mode === "classic") {
+          for (const char of value) rawTokens.push({ text: char, type: "cjk" });
+        } else {
+          for (let i = 0; i < value.length; i += 2) {
+            rawTokens.push({ text: value.slice(i, i + 2), type: "cjk" });
+          }
+        }
+      } else if (/^[a-zA-Z0-9]+$/.test(value)) {
+        rawTokens.push({
+          text: value,
+          type: /^[0-9]+$/.test(value) ? "number" : "latin",
+        });
+      } else {
+        rawTokens.push({ text: value, type: "punctuation" });
+      }
+    }
+
+    return rawTokens;
+  }
+
+  function getTokenFontSize(type, baseFontSize, mode) {
+    if (mode === "classic") return baseFontSize;
+
+    if (mode === "compact") {
+      if (type === "latin") return Math.round(baseFontSize * 0.62);
+      if (type === "number") return Math.round(baseFontSize * 0.7);
+      if (type === "punctuation") return Math.round(baseFontSize * 0.68);
+      return baseFontSize;
+    }
+
+    if (type === "latin") return Math.round(baseFontSize * 0.72);
+    if (type === "number") return Math.round(baseFontSize * 0.78);
+    if (type === "punctuation") return Math.round(baseFontSize * 0.75);
+    return baseFontSize;
+  }
+
+  function assignTokenAngles(tokens) {
+    return tokens.map((token, index) => ({
+      ...token,
+      angle: index % 2 === 0 ? -Math.PI / 2 : Math.PI / 2,
+    }));
+  }
+
+  function splitTokenByPixelWidth(text, context, maxWidth) {
+    const segments = [];
+    let current = "";
+
+    for (const char of text) {
+      const next = current + char;
+      if (context.measureText(next).width <= maxWidth || current === "") {
+        current = next;
+      } else {
+        segments.push(current);
+        current = char;
+      }
+    }
+
+    if (current) segments.push(current);
+    return segments;
+  }
+
+  function measureTokens(tokens, mode, baseFontSize) {
+    return tokens.map(token => {
+      const fontSize = getTokenFontSize(token.type, baseFontSize, mode);
+      ctx.font = `${fontSize}px sans-serif`;
+
+      const segmentMax =
+        mode === "compact"
+          ? fontSize * 3.6
+          : mode === "classic"
+            ? fontSize * 3.8
+            : fontSize * 4.6;
+
+      const shouldSplit =
+        token.type === "latin" &&
+        ctx.measureText(token.text).width > segmentMax;
+      const texts = shouldSplit
+        ? splitTokenByPixelWidth(token.text, ctx, segmentMax)
+        : [token.text];
+
+      const segments = texts.map(text => {
+        const rawWidth = Math.ceil(ctx.measureText(text).width);
+        return {
+          text,
+          rawWidth,
+          boxWidth: fontSize + config.segmentGap,
+          boxHeight: rawWidth + config.segmentGap,
+        };
+      });
+
+      return {
+        ...token,
+        fontSize,
+        segments,
+        boxWidth: segments.reduce((sum, segment) => sum + segment.boxWidth, 0),
+        boxHeight: Math.max(
+          ...segments.map(segment => segment.boxHeight),
+          fontSize
+        ),
+      };
+    });
+  }
+
+  function drawRotatedText(text, centerX, centerY, angle, fontSize) {
+    ctx.save();
+    ctx.font = `${fontSize}px sans-serif`;
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillStyle = config.textColor;
+    ctx.translate(centerX, centerY);
+    ctx.rotate(angle);
+    ctx.fillText(text, 0, 0);
+    ctx.restore();
+  }
+
+  function drawToken(token, startX, centerY) {
+    let x = startX;
+    for (const segment of token.segments) {
+      const centerX = x + segment.boxWidth / 2;
+      drawRotatedText(
+        segment.text,
+        centerX,
+        centerY,
+        token.angle,
+        token.fontSize
+      );
+      x += segment.boxWidth;
+    }
+  }
+
+  function getTextCanvasSize(ratio) {
+    if (ratio === "story") return { width: 900, height: 1200 };
+    if (ratio === "phone") return { width: 720, height: 1280 };
+    return null;
+  }
+
+  function layoutTokens(measuredTokens, maxContentWidth) {
+    const rows = [];
+    let currentRow = [];
+    let currentWidth = 0;
+
+    for (const token of measuredTokens) {
+      const nextWidth =
+        currentWidth +
+        token.boxWidth +
+        (currentRow.length > 0 ? config.tokenGap : 0);
+
+      if (currentRow.length > 0 && nextWidth > maxContentWidth) {
+        rows.push({
+          tokens: currentRow,
+          width: currentWidth,
+          height: Math.max(...currentRow.map(item => item.boxHeight)),
+        });
+        currentRow = [token];
+        currentWidth = token.boxWidth;
+      } else {
+        currentRow.push(token);
+        currentWidth = nextWidth;
+      }
+    }
+
+    if (currentRow.length > 0) {
+      rows.push({
+        tokens: currentRow,
+        width: currentWidth,
+        height: Math.max(...currentRow.map(item => item.boxHeight)),
+      });
+    }
+
+    return rows;
+  }
+
+  function drawLaidOutTokens(rows, canvasWidth, canvasHeight, rowGap) {
+    const contentHeight = rows.reduce(
+      (sum, row, index) => sum + row.height + (index > 0 ? rowGap : 0),
+      0
+    );
+    const availableHeight =
+      canvasHeight - config.padding * 2 - config.topChaosHeight;
+    let y =
+      config.padding +
+      config.topChaosHeight +
+      Math.max(0, (availableHeight - contentHeight) / 2);
+
+    for (const row of rows) {
+      let cursorX = Math.max(config.padding, (canvasWidth - row.width) / 2);
+      const centerY = y + row.height / 2;
+
+      for (const token of row.tokens) {
+        drawToken(token, cursorX, centerY);
+        cursorX += token.boxWidth + config.tokenGap;
+      }
+
+      y += row.height + rowGap;
+    }
+  }
+
+  function getRowsHeight(rows, rowGap) {
+    return rows.reduce(
+      (sum, row, index) => sum + row.height + (index > 0 ? rowGap : 0),
+      0
+    );
+  }
+
+  function fitTextLayout(tokens, mode, maxFontSize, fixedSize) {
+    const minFontSize = 24;
+    const size = fixedSize ?? { width: 960, height: 9999 };
+
+    for (let fontSize = maxFontSize; fontSize >= minFontSize; fontSize -= 2) {
+      const rowGap = Math.round(fontSize * config.rowGapRatio);
+      const measuredTokens = measureTokens(tokens, mode, fontSize);
+      const rows = layoutTokens(
+        measuredTokens,
+        size.width - config.padding * 2
+      );
+      const contentHeight = getRowsHeight(rows, rowGap);
+      const requiredHeight =
+        config.padding * 2 + config.topChaosHeight + contentHeight;
+
+      if (!fixedSize || requiredHeight <= size.height) {
+        return {
+          fontSize,
+          measuredTokens,
+          rows,
+          rowGap,
+          requiredHeight,
+          widestRow: Math.max(...rows.map(row => row.width), 0),
+        };
+      }
+    }
+
+    const rowGap = Math.round(minFontSize * config.rowGapRatio);
+    const measuredTokens = measureTokens(tokens, mode, minFontSize);
+    const rows = layoutTokens(measuredTokens, size.width - config.padding * 2);
+
+    return {
+      fontSize: minFontSize,
+      measuredTokens,
+      rows,
+      rowGap,
+      requiredHeight:
+        config.padding * 2 +
+        config.topChaosHeight +
+        getRowsHeight(rows, rowGap),
+      widestRow: Math.max(...rows.map(row => row.width), 0),
+    };
+  }
+
+  function drawChaosLines(width, height, count) {
+    for (let i = 0; i < count; i++) {
+      ctx.save();
+      ctx.beginPath();
+      ctx.strokeStyle = `hsla(${Math.random() * 360}, 100%, 50%, ${0.4 + Math.random() * 0.6})`;
+      ctx.lineWidth = 1 + Math.random() * 4;
+      ctx.moveTo(Math.random() * width, Math.random() * height);
+      ctx.lineTo(Math.random() * width, Math.random() * height);
+      ctx.stroke();
+      ctx.restore();
+    }
+  }
+
+  function generateTextChaos() {
+    try {
+      const text = document.getElementById("text-input").value.trim();
+      const mode = document.getElementById("layout-mode").value;
+      const ratio = document.getElementById("canvas-ratio").value;
+      const lineCount =
+        Number(document.getElementById("text-lines").value) || 0;
+
+      if (!text) {
+        setStatus("请输入文字");
+        return;
+      }
+
+      const tokens = assignTokenAngles(tokenizeText(text, mode));
+      const fixedSize = getTextCanvasSize(ratio);
+      const fitted = fitTextLayout(
+        tokens,
+        mode,
+        config.maxTextFontSize,
+        fixedSize
+      );
+      const width = fixedSize
+        ? fixedSize.width
+        : Math.ceil(config.padding * 2 + fitted.widestRow);
+      const height = fixedSize
+        ? fixedSize.height
+        : Math.ceil(fitted.requiredHeight);
+
+      if (
+        width > 10000 ||
+        height > 4000 ||
+        (fixedSize && fitted.requiredHeight > fixedSize.height)
+      ) {
+        setStatus("文字太长，请减少内容或使用紧凑模式");
+        return;
+      }
+
+      clearCanvas(width, height);
+      drawChaosLines(width, height, lineCount);
+      drawLaidOutTokens(fitted.rows, width, height, fitted.rowGap);
+
+      setStatus(
+        `已生成 ${fitted.measuredTokens.length} 个 token，字号 ${fitted.fontSize}，输出为 ${width} x ${height} 竖图`
+      );
+    } catch {
+      setStatus("生成失败，请更换浏览器或减少内容");
+    }
+  }
+
+  function loadImageFallback(file) {
+    return new Promise((resolve, reject) => {
+      const img = new Image();
+      img.onload = () => resolve(img);
+      img.onerror = reject;
+      img.src = URL.createObjectURL(file);
+    });
+  }
+
+  async function loadImageFromFile(file) {
+    if (window.createImageBitmap) return createImageBitmap(file);
+    return loadImageFallback(file);
+  }
+
+  function resizeImageSize(width, height, maxWidth) {
+    const scale = Math.min(1, maxWidth / width);
+    return {
+      width: Math.round(width * scale),
+      height: Math.round(height * scale),
+    };
+  }
+
+  async function generateImageChaos() {
+    try {
+      const file = imageInput.files?.[0];
+      if (!file) {
+        setStatus("请选择图片");
+        return;
+      }
+      if (!/^image\/(png|jpeg|webp)$/.test(file.type)) {
+        setStatus("请选择 PNG / JPEG / WebP 图片");
+        return;
+      }
+
+      const maxWidth =
+        Number(document.getElementById("max-width").value) || 2000;
+      const lineCount =
+        Number(document.getElementById("image-lines").value) || 0;
+      currentImageBitmap = await loadImageFromFile(file);
+      const size = resizeImageSize(
+        currentImageBitmap.width,
+        currentImageBitmap.height,
+        maxWidth
+      );
+
+      clearCanvas(size.width, size.height);
+      ctx.save();
+      ctx.translate(canvas.width / 2, canvas.height / 2);
+      ctx.rotate(Math.PI);
+      ctx.drawImage(
+        currentImageBitmap,
+        -size.width / 2,
+        -size.height / 2,
+        size.width,
+        size.height
+      );
+      ctx.restore();
+      drawChaosLines(size.width, size.height, lineCount);
+      setStatus("图片已在本地倒置处理，可下载 JPEG");
+    } catch {
+      setStatus("图片太大，请降低最大宽度后重试");
+    }
+  }
+
+  function downloadBlob(blob, filename) {
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  }
+
+  function downloadCanvas(filename, type, quality) {
+    canvas.toBlob(
+      blob => {
+        if (!blob) {
+          setStatus("导出失败，请更换浏览器或减少图片尺寸");
+          return;
+        }
+        downloadBlob(blob, filename);
+      },
+      type,
+      quality
+    );
+  }
+
+  document.querySelectorAll(".mode-tab").forEach(button => {
+    button.addEventListener("click", () => switchMode(button.dataset.mode));
+  });
+
+  document
+    .getElementById("generate-text")
+    .addEventListener("click", generateTextChaos);
+  document
+    .getElementById("text-input")
+    .addEventListener("blur", generateTextChaos);
+  document
+    .getElementById("layout-mode")
+    .addEventListener("change", generateTextChaos);
+  document
+    .getElementById("canvas-ratio")
+    .addEventListener("change", generateTextChaos);
+  document
+    .getElementById("text-lines")
+    .addEventListener("change", generateTextChaos);
+  document
+    .getElementById("generate-image")
+    .addEventListener("click", generateImageChaos);
+  document.getElementById("download-text").addEventListener("click", () => {
+    downloadCanvas("chaos-text.png", "image/png");
+  });
+  document.getElementById("download-image").addEventListener("click", () => {
+    const quality =
+      Number(document.getElementById("jpeg-quality").value) || 0.85;
+    downloadCanvas("chaos-image.jpg", "image/jpeg", quality);
+  });
+
+  clearCanvas();
+  generateTextChaos();
+</script>
