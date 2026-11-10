@@ -1,5 +1,5 @@
 ---
-title: "Foldable Flight 收录 109 款纸飞机，可以按手边的 | Hacker News 摘要 (2026-11-10)"
+title: "Foldable Flight 收录 109 款纸飞机 | Hacker News 摘要 (2026-11-10)"
 author: "hacknews"
 description: ""
 digest: "Foldable Flight 把 109 款纸飞机整理成一个可以筛选的图鉴。手边只有一张 A4 打印纸，可以先按纸张规格筛，再选折叠难度。网站也支持美国 Letter 和方形纸，并能按设计者或机型筛选，例如飞镖型、滑翔机和特技机。每款飞机"
